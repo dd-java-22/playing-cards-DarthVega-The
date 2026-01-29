@@ -21,6 +21,6 @@ public class Deck {
             cards.add(card);
           }
         }
-    dealer = null;
+    dealer = null
   }
 }
