@@ -1,14 +1,17 @@
 package edu.cnm.deepdive.cards.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 public class Deck {
 
   private final List<Card> cards;
 
-  private final Iterator<Card> dealer;
+  private Iterator<Card> dealer;
 
 
   public Deck() {
@@ -21,6 +24,15 @@ public class Deck {
             cards.add(card);
           }
         }
-    dealer = null;
+    dealer = cards.iterator();
+  }
+
+  public void shuffle(RandomGenerator rng) {
+    Collections.shuffle(cards, rng);
+    dealer = cards.iterator();
+  }
+
+  public void sort(Comparator<Card> comparator){
+    cards.sort(comparator);
   }
 }
