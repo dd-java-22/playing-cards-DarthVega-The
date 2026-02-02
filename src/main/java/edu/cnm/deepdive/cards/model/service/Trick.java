@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.cards.model.service;
 
+import edu.cnm.deepdive.cards.model.BlackFirstComparator;
 import edu.cnm.deepdive.cards.model.Card;
 import edu.cnm.deepdive.cards.model.Deck;
+import edu.cnm.deepdive.cards.model.RedFirstComparator;
 import edu.cnm.deepdive.cards.model.Suit.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Trick {
     redPile = new ArrayList<>();
   }
 
-  public void perform() {
+  public void perform(boolean swap) {
     blackPile.clear();
     redPile.clear();
     deck.shuffle(rng);
@@ -36,10 +38,17 @@ public class Trick {
       }
     }
 
-    //TODO 2/2/26 Add logic to swap cards between piles
+    if (swap) {
+      int maxSwap = Math.min(blackPile.size(), redPile.size());
+      int numSwaps = rng.nextInt(1, maxSwap + 1);
+      for (int i = 0; i < numSwaps; i++) {
+        redPile.add(blackPile.removeFirst());
+        blackPile.add(redPile.removeFirst());
+      }
+    }
 
-    blackPile.sort(null);
-    redPile.sort(null);
+    blackPile.sort(new BlackFirstComparator());
+    redPile.sort(new RedFirstComparator());
   }
 
   public void reveal() {
