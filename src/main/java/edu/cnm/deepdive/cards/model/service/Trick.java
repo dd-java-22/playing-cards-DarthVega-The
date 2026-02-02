@@ -23,6 +23,9 @@ public class Trick {
   }
 
   public void perform(boolean swap) {
+
+
+
     blackPile.clear();
     redPile.clear();
     deck.shuffle(rng);
@@ -46,8 +49,26 @@ public class Trick {
       }
     }
 
-    blackPile.sort(new BlackFirstComparator());
-    redPile.sort(new RedFirstComparator());
+    blackPile.sort(new Comparator<>(){
+      @Override
+      public int compare(Card card1, Card card2) {
+        int result = card1.getColor().compareTo(card2.getColor());
+        if (result == 0) {
+          result = card1.compareTo(card2);
+        }
+        return result;
+      }
+    });
+    redPile.sort(new Comparator<>() {
+      @Override
+      public int compare(Card card1, Card card2) {
+        int result = card2.getColor().compareTo(card1.getColor());
+        if (result == 0) {
+          result = card1.compareTo(card2);
+        }
+        return result;
+      }
+    });
   }
 
   public void reveal() {
@@ -55,34 +76,5 @@ public class Trick {
     System.out.println(redPile);
   }
 
-
-
-private static class BlackFirstComparator implements Comparator<Card> {
-
-  @Override
-  public int compare(Card card1, Card card2) {
-    int result = card1.getColor().compareTo(card2.getColor());
-    if (result == 0) {
-      result = card1.compareTo(card2);
-    }
-    return result;
-  }
-
-
-}
-
-private static class RedFirstComparator implements Comparator<Card> {
-
-  @Override
-  public int compare(Card card1, Card card2) {
-    int result = card2.getColor().compareTo(card1.getColor());
-    if (result == 0) {
-      result = card1.compareTo(card2);
-    }
-    return result;
-  }
-
-
-}
 
 }
