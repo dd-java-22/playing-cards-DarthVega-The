@@ -55,9 +55,9 @@ public class Trick {
     System.out.println(redPile);
   }
 
-}
 
-class BlackFirstComparator implements Comparator<Card> {
+
+private static class BlackFirstComparator implements Comparator<Card> {
 
   @Override
   public int compare(Card card1, Card card2) {
@@ -71,7 +71,7 @@ class BlackFirstComparator implements Comparator<Card> {
 
 }
 
-class RedFirstComparator implements Comparator<Card> {
+private static class RedFirstComparator implements Comparator<Card> {
 
   @Override
   public int compare(Card card1, Card card2) {
@@ -82,5 +82,7 @@ class RedFirstComparator implements Comparator<Card> {
     return result;
   }
 
+
+}
 
 }
