@@ -78,25 +78,20 @@ public class View {
       String compositionFormat = bundle.getString(COMPOSITION_FORMAT_KEY);
       String blackPileRepr = blackPile
           .stream()
-          .map((card) -> {
-        return compositionFormat.formatted(
-            bundle.getString(card.getRank().name()
-            bundle.getString(card.getSuit().name()
-            );
-      })
+          .map((card) -> compositionFormat.formatted(
+              bundle.getString(card.getRank().name()),
+              bundle.getString(card.getSuit().name())
+          ))
+          .collect(Collectors.joining(", "));
       String redPileRepr = redPile
           .stream()
-          .map((card) -> {
-        return compositionFormat.formatted(
-            bundle.getString(card.getRank().name()
-                bundle.getString(card.getSuit().name()
-                );
-      })
-
-      stream<String>
-          .collection(Collectors.joining(", "));
-      return "Red Pile: (" + redInRedCount + " red cards) "+ redPile +
-          "\nBlack Pile (" + blackInBlackCount + " black cards): " + blackPile;
+          .map((card) -> compositionFormat.formatted(
+              bundle.getString(card.getRank().name()),
+              bundle.getString(card.getSuit().name())
+          ))
+          .collect(Collectors.joining(", "));
+      return "Red Pile: (" + redInRedCount + " red cards) " + redPileRepr +
+          "\nBlack Pile (" + blackInBlackCount + " black cards): " + blackPileRepr;
     }
   }
 }
