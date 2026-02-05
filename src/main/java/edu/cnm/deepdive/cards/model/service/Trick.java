@@ -53,11 +53,11 @@ public class Trick {
   }
 
   public Map<Color, List<Card>> getResult() {
-    return Map.of();
+    return Map.of(
     Color.BLACK, Collections.unmodifiableList(blackPile),
         Color.RED, Collections.unmodifiableList(redPile)
-    );
 
+    );
   }
 
 }
